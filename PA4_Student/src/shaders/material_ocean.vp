@@ -1,0 +1,21 @@
+/* Pass eyespace position and normal, and texcoord, to the fragment shader. */
+varying vec3 WorldspacePosition;
+varying vec3 EyespacePosition;
+varying vec3 EyespaceNormal;
+varying vec2 TexCoord;
+
+uniform float Time;
+//attribute float noiseval;
+
+void main()
+{
+	/* Standard vertex transform. */
+	gl_Position = ftransform();
+	
+	/* Pass eyespace position and normal, and texcoord, to the fragment shader. */
+	WorldspacePosition = gl_Vertex.xyz;
+	//EyespacePosition.y = EyespacePosition.y + sin(Time + EyespacePosition.x) * cos(Time + EyespacePosition.z);
+	EyespacePosition = vec3(gl_ModelViewMatrix * gl_Vertex);
+	EyespaceNormal = normalize(gl_NormalMatrix * gl_Normal);
+	TexCoord = gl_MultiTexCoord0.st;
+}

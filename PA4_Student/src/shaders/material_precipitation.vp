@@ -1,0 +1,36 @@
+/**
+ * material_particle.vp
+ * 
+ * Vertex shader shader which forward-shades an (unshaded, alpha-blended) particle system.
+ * 
+ * Written for Cornell CS 5625 (Interactive Computer Graphics).
+ * Copyright (c) 2012, Computer Science Department, Cornell University.
+ * 
+ * @author Asher Dunn (ad488)
+ * @date 2012-04-15
+ */
+ 
+ uniform float ylimit;
+
+/* Pass eyespace position and normal, and texcoord, to the fragment shader. */
+varying vec2 TexCoord;
+varying float limit;
+varying vec4 position;
+
+void main()
+{
+	/* Standard vertex transform. */
+	position = gl_ModelViewProjectionMatrix * gl_Vertex;
+	gl_Position = ftransform();
+	
+	/* Pass eyespace position and normal, and texcoord, to the fragment shader. */
+	//SOLUTION
+	TexCoord = gl_MultiTexCoord0.st;
+	//FILLIN
+	//	EyespacePosition = EyespaceNormal = vec3(1.0);
+	//ENDSOLUTION
+	
+	limit = 0.0;
+	
+	TexCoord = gl_MultiTexCoord0.st;
+}
